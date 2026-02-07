@@ -47,3 +47,5 @@ format:
     toc: true
     toc-depth: 4
     toc-expand: true
+    include-in-header:
+      - text: '<meta name="google-site-verification" content="9hD5MQX6GQ7EHZ4FtWwstq2okEFsMOtBoBkqi7TA0U4" />'

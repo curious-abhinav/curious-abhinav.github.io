@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Notes – Abhinav Singh</title>
+<title>claude – Abhinav Singh</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -112,34 +146,63 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#claude.md" id="toc-claude.md" class="nav-link active" data-scroll-target="#claude.md">CLAUDE.md</a>
+  <ul>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link" data-scroll-target="#project-overview">Project Overview</a></li>
+  <li><a href="#build-commands" id="toc-build-commands" class="nav-link" data-scroll-target="#build-commands">Build Commands</a></li>
+  <li><a href="#architecture" id="toc-architecture" class="nav-link" data-scroll-target="#architecture">Architecture</a></li>
+  <li><a href="#adding-a-new-blog-post" id="toc-adding-a-new-blog-post" class="nav-link" data-scroll-target="#adding-a-new-blog-post">Adding a New Blog Post</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Notes</h1>
-</div>
 
 
 
-<div class="quarto-title-meta">
+<section id="claude.md" class="level1">
+<h1>CLAUDE.md</h1>
+<p>This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.</p>
+<section id="project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
+<p>Personal website for Abhinav Singh, built with <a href="https://quarto.org/">Quarto</a> and hosted on GitHub Pages at https://curious-abhinav.github.io.</p>
+</section>
+<section id="build-commands" class="level2">
+<h2 class="anchored" data-anchor-id="build-commands">Build Commands</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview          <span class="co"># Local dev server with live reload</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render           <span class="co"># Build the site (output goes to docs/)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>There are no tests, linters, or CI pipelines configured.</p>
+</section>
+<section id="architecture" class="level2">
+<h2 class="anchored" data-anchor-id="architecture">Architecture</h2>
+<ul>
+<li><strong>Quarto website project</strong> — configured in <code>_quarto.yml</code>, outputs rendered HTML to <code>docs/</code> which is served by GitHub Pages</li>
+<li><strong>Content pages</strong> are <code>.qmd</code> files (Quarto Markdown) at the repo root: <code>index.qmd</code> (About/landing page), <code>posts.qmd</code> (blog listing), <code>notes.qmd</code>, <code>projects.qmd</code></li>
+<li><strong>Blog posts</strong> live in <code>posts/&lt;post-slug&gt;/index.qmd</code> with images alongside them; shared post metadata (author, freeze, title-block-banner) is in <code>posts/_metadata.yml</code></li>
+<li><strong><code>docs/</code></strong> is the rendered output directory committed to the repo — do not edit files in <code>docs/</code> directly; they are regenerated by <code>quarto render</code></li>
+<li><strong><code>_site/</code></strong> is a Quarto build artifact directory and is gitignored</li>
+<li><strong>Styling</strong> is in <code>styles.scss</code> using SCSS variables and rules on top of Quarto’s default theme; fonts are IBM Plex Sans (body) and EB Garamond (paragraphs/titles), accent color is <code>$maroon: #ba3925</code></li>
+<li><strong>Navbar</strong> currently shows “About” and “Posts”; other sections (Notes, Projects) are commented out in <code>_quarto.yml</code></li>
+</ul>
+</section>
+<section id="adding-a-new-blog-post" class="level2">
+<h2 class="anchored" data-anchor-id="adding-a-new-blog-post">Adding a New Blog Post</h2>
+<ol type="1">
+<li>Create <code>posts/&lt;slug&gt;/index.qmd</code> with YAML front matter: <code>title</code>, <code>description</code>, <code>date</code>, <code>categories</code>, <code>image</code></li>
+<li>Place images in the same directory as the post’s <code>index.qmd</code></li>
+<li>Run <code>quarto render</code> to build; the post will automatically appear in the table listing on the Posts page</li>
+</ol>
 
-    
-  
-    
-  </div>
-  
 
-
-</header>
-
-
-<p>check 123</p>
-
-
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
