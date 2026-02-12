@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - robots.txt
 
 website:
   site-url: https://curious-abhinav.github.io
